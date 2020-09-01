@@ -568,6 +568,17 @@ void uart_gpio_set(UART_TxPinDef tx_pin,UART_RxPinDef rx_pin)
 
 }
 
+unsigned char uart_CSend(char* data){
+	#if (HCI_ACCESS == HCI_USE_UART)
+	while(*data != '\0')
+	{
+		uart_ndma_send_byte(*(data++));
+	}
+	#endif
+	return 0;
+
+}
+
 
 
 

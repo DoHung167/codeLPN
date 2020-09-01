@@ -1633,6 +1633,45 @@ void sim_tx_cmd_node2node()
 #endif
 }
 
+
+void uart_drv_init()
+{
+#if(MCU_CORE_TYPE == MCU_CORE_8258 || (MCU_CORE_TYPE == MCU_CORE_8278))
+//note: dma addr must be set first before any other uart initialization! (confirmed by sihui)
+	u8 *uart_rx_addr = hci_rx_fifo.p + (hci_rx_fifo.wptr & (hci_rx_fifo.num-1)) * hci_rx_fifo.size;
+	uart_recbuff_init( uart_rx_addr, hci_rx_fifo.size, uart_hw_tx_buf);
+	uart_gpio_set(UART_TX_PIN, UART_RX_PIN);
+
+	uart_reset();  //will reset uart digital registers from 0x90 ~ 0x9f, so uart setting must set after this reset
+
+	//baud rate: 115200
+	#if (CLOCK_SYS_CLOCK_HZ == 16000000)
+		uart_init(9, 13, PARITY_NONE, STOP_BIT_ONE);
+	#elif (CLOCK_SYS_CLOCK_HZ == 24000000)
+		uart_init(12, 15, PARITY_NONE, STOP_BIT_ONE);
+	#elif (CLOCK_SYS_CLOCK_HZ == 32000000)
+		uart_init(8, 30, PARITY_NONE, STOP_BIT_ONE);
+	#elif (CLOCK_SYS_CLOCK_HZ == 48000000)
+		uart_init(15, 25, PARITY_NONE, STOP_BIT_ONE);
+	#endif
+
+	uart_dma_enable(0, 0); 	//uart data in hardware buffer moved by dma, so we need enable them first
+
+	irq_set_mask(FLD_IRQ_DMA_EN);
+	dma_chn_irq_enable(FLD_DMA_CHN_UART_RX | FLD_DMA_CHN_UART_TX, 1);   	//uart Rx/Tx dma irq enable
+#else
+
+	//todo:uart init here
+	uart_io_init(UART_GPIO_SEL);
+#if(CLOCK_SYS_CLOCK_HZ == 32000000)
+	CLK32M_UART115200;
+#elif(CLOCK_SYS_CLOCK_HZ == 16000000)
+	CLK16M_UART115200;
+#endif
+	uart_BuffInit(hci_rx_fifo_b, hci_rx_fifo.size, uart_hw_tx_buf);
+#endif
+}
+
 void usb_id_init()
 {
 #if(MCU_CORE_TYPE == MCU_CORE_8269)
@@ -2566,7 +2605,7 @@ u8 uart_hw_tx_buf[160 + UART_HW_HEAD_LEN]; // not for user
 u8 uart_hw_tx_buf[HCI_TX_FIFO_SIZE_USABLE + UART_HW_HEAD_LEN]; // not for user;  2: sizeof(fifo.len)
 #endif
 const u8 UART_TX_LEN_MAX = (sizeof(uart_hw_tx_buf) - UART_HW_HEAD_LEN);
-
+/*
 void uart_drv_init()
 {
 #if(MCU_CORE_TYPE == MCU_CORE_8258 || (MCU_CORE_TYPE == MCU_CORE_8278))
@@ -2604,6 +2643,7 @@ void uart_drv_init()
 	uart_BuffInit(hci_rx_fifo_b, hci_rx_fifo.size, uart_hw_tx_buf);
 #endif
 }
+*/
 
 int blc_rx_from_uart (void)
 {

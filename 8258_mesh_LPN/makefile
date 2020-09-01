@@ -51,46 +51,46 @@ sizedummy \
 all: pre-build main-build
 
 # Main-build Target
-main-build: ble_lt_mesh.elf secondary-outputs
+main-build: LPN_demo.elf secondary-outputs
 
 # Tool invocations
-ble_lt_mesh.elf: $(OBJS) $(USER_OBJS)
+LPN_demo.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: TC32 C Linker'
-	tc32-elf-ld --gc-sections -L"G:\BLE\telink_sig_mesh_sdk_v3.2.2\firmware\proj_lib" -T ../boot.link -o"ble_lt_mesh.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	tc32-elf-ld --gc-sections -L"D:\HungDC\code\camBien\LPNdemo\proj_lib" -T ../boot.link -o"LPN_demo.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build
 
-8258_mesh_LPN.lst: ble_lt_mesh.elf
+8258_mesh_LPN.lst: LPN_demo.elf
 	@echo 'Invoking: TC32 Create Extended Listing'
-	tc32-elf-objdump -x -D -l -S ble_lt_mesh.elf  >"8258_mesh_LPN.lst"
+	tc32-elf-objdump -x -D -l -S LPN_demo.elf  >"8258_mesh_LPN.lst"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-: ble_lt_mesh.elf
+: LPN_demo.elf
 	@echo 'Create Flash image (binary format)'
-	tc32-elf-objcopy ble_lt_mesh.elf
+	tc32-elf-objcopy LPN_demo.elf
 	@echo 'Finished building: $@'
 	@echo ' '
 
-sizedummy: ble_lt_mesh.elf
+sizedummy: LPN_demo.elf
 	@echo 'Invoking: Print Size'
-	tc32-elf-size -t ble_lt_mesh.elf
+	tc32-elf-size -t LPN_demo.elf
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(FLASH_IMAGE)$(ELFS)$(OBJS)$(LST)$(SIZEDUMMY) ble_lt_mesh.elf
+	-$(RM) $(FLASH_IMAGE)$(ELFS)$(OBJS)$(LST)$(SIZEDUMMY) LPN_demo.elf
 	-@echo ' '
 
 pre-build:
-	-"G:\BLE\telink_sig_mesh_sdk_v3.2.2\firmware/getver.sh"
+	-"D:\HungDC\code\camBien\LPNdemo/getver.sh"
 	-@echo ' '
 
 post-build:
-	-"G:\BLE\telink_sig_mesh_sdk_v3.2.2\firmware/tl_check_fw.sh"   8258_mesh_LPN   ble_lt_mesh
+	-"D:\HungDC\code\camBien\LPNdemo/tl_check_fw.sh"   8258_mesh_LPN   LPN_demo
 	-@echo ' '
 
 secondary-outputs: $(LST) $(FLASH_IMAGE) $(SIZEDUMMY)

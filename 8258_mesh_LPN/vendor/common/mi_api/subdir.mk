@@ -18,7 +18,7 @@ OBJS += \
 vendor/common/mi_api/%.o: ../vendor/common/mi_api/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: TC32 Compiler'
-	tc32-elf-gcc -ffunction-sections -fdata-sections -I"G:\BLE\telink_sig_mesh_sdk_v3.2.2\firmware" -I"G:\BLE\telink_sig_mesh_sdk_v3.2.2\firmware\vendor\common\mi_api\mijia_ble_api" -I"G:\BLE\telink_sig_mesh_sdk_v3.2.2\firmware\vendor\common\mi_api\libs" -D__PROJECT_MESH_LPN__=1 -DCHIP_TYPE=CHIP_TYPE_8258 -Wall -O2 -fpack-struct -fshort-enums -finline-small-functions -std=gnu99 -fshort-wchar -fms-extensions -c -o"$@" "$<"
+	tc32-elf-gcc -ffunction-sections -fdata-sections -I"D:\HungDC\code\camBien\LPNdemo" -I"D:\HungDC\code\camBien\LPNdemo\vendor\common\mi_api\mijia_ble_api" -I"D:\HungDC\code\camBien\LPNdemo\vendor\common\mi_api\libs" -D__PROJECT_MESH_LPN__=1 -DCHIP_TYPE=CHIP_TYPE_8258 -Wall -O2 -fpack-struct -fshort-enums -finline-small-functions -std=gnu99 -fshort-wchar -fms-extensions -c -o"$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

@@ -947,7 +947,7 @@ extern mesh_rx_seg_par_t mesh_rx_seg_par;
 
 #define LPN_MIN_CACHE_SIZE_LOG      (1)     // at lease 2 messages
 #define LPN_POLL_TIMEOUT_100MS      (10*10) // unit: 100ms, 0x0A~0x34BBFF
-#define FRI_POLL_INTERVAL_MS        (2000)	// auto send poll interval
+#define FRI_POLL_INTERVAL_MS        (4500)	// auto send poll interval
 
 #define FRI_REQ_TIMEOUT_MS          (2000)  // must larger than 1100ms
 #define FRI_REQ_RETRY_IDLE_MS       (FRI_REQ_TIMEOUT_MS - FRI_ESTABLISH_PERIOD_MS)	// auto trigger next FRI_REQ_RETRY_MAX request interval 

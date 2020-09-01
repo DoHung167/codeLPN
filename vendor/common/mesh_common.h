@@ -155,7 +155,7 @@ int app_advertise_prepare_handler (rf_packet_adv_t * p);
 void my_att_init(u8 mode);
 void ble_mac_init();
 void usb_id_init();
-void uart_drv_init();
+extern void uart_drv_init();
 void adc_drv_init();
 int blc_rx_from_uart (void);
 int blc_hci_tx_to_uart ();

@@ -80,11 +80,11 @@ extern "C" {
 #define HCI_USE_NONE	0
 #define HCI_USE_UART	1
 #define HCI_USE_USB		2
-#define HCI_ACCESS		HCI_USE_NONE
+#define HCI_ACCESS		HCI_USE_UART
 
 #if (HCI_ACCESS==HCI_USE_UART)
-#define UART_TX_PIN		UART_TX_PB1
-#define UART_RX_PIN		UART_RX_PB0
+#define UART_TX_PIN		UART_TX_PD7
+#define UART_RX_PIN		UART_RX_PA0
 #endif
 
 #define HCI_LOG_FW_EN   0
@@ -157,12 +157,12 @@ extern "C" {
 
 //---------------  Button 
 #if (PCBA_8258_SEL == PCBA_8258_DONGLE_48PIN)
-#define PULL_WAKEUP_SRC_PD6     PM_PIN_PULLUP_1M	//btn
-#define PULL_WAKEUP_SRC_PD5     PM_PIN_PULLUP_1M	//btn
-#define PD6_INPUT_ENABLE		1
-#define PD5_INPUT_ENABLE		1
-#define	SW1_GPIO				GPIO_PD6
-#define	SW2_GPIO				GPIO_PD5
+#define PULL_WAKEUP_SRC_PD3     PM_PIN_PULLUP_1M	//btn
+#define PULL_WAKEUP_SRC_PD4     PM_PIN_PULLUP_1M	//btn
+#define PD3_INPUT_ENABLE		1
+#define PD4_INPUT_ENABLE		1
+#define	SW1_GPIO				GPIO_PD3
+#define	SW2_GPIO				GPIO_PD4
 #elif (PCBA_8258_SEL == PCBA_8258_C1T140A3_V1_1)
 #define PULL_WAKEUP_SRC_PD7     PM_PIN_PULLUP_1M	//btn
 #define PULL_WAKEUP_SRC_PA1     PM_PIN_PULLUP_1M	//btn
@@ -181,10 +181,10 @@ extern "C" {
 
 //---------------  LED / PWM
 #if(PCBA_8258_SEL == PCBA_8258_DONGLE_48PIN)
-#define PWM_R       GPIO_PWM1A3		//red
-#define PWM_G       GPIO_PWM0A2		//green
+#define PWM_R       GPIO_PB5  	//red
+#define PWM_G       GPIO_PB4	//green
 #define PWM_B       GPIO_PWM3B0		//blue
-#define PWM_W       GPIO_PWM4B1		//white
+#define PWM_W       GPIO_PWM0A2	//white//GPIO_PWM0A2
 #elif(PCBA_8258_SEL == PCBA_8258_C1T140A3_V1_1)
 #define PWM_R       GPIO_PWM2ND4    //red
 #define PWM_G       GPIO_PWM0NA0    //green
