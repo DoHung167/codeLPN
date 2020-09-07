@@ -704,9 +704,9 @@ typedef struct{
 #if (LIGHT_TYPE_SEL == LIGHT_TYPE_PANEL)
 #define LIGHT_CNT                       (3)     // means instance count
 #else
-#define LIGHT_CNT                       (1)     // means instance count
-#endif
+#define LIGHT_CNT                       (1)
 #define ELE_CNT                         (LIGHT_CNT * ELE_CNT_EVERY_LIGHT)
+#endif
 
 
 enum{

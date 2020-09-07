@@ -576,7 +576,6 @@ unsigned char uart_CSend(char* data){
 	}
 	#endif
 	return 0;
-
 }
 
 

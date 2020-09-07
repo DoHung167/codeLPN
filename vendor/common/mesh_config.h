@@ -556,7 +556,6 @@ extern "C" {
 #define MD_SENSOR_CLIENT_EN		    0	// MD_CLIENT_EN
     #endif
 #endif
-
 #if WIN32
 #define MD_PRIVACY_BEA			1
 #define PRIVATE_PROXY_FUN_EN	1

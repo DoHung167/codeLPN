@@ -1322,6 +1322,8 @@ const mesh_cmd_sig_func_t mesh_cmd_sig_func[] = {
     {G_MFG_PROPERTY_SET_NOACK, 0, SIG_MD_G_PROP_C, SIG_MD_G_MFG_PROP_S, mesh_cmd_sig_property_set, STATUS_NONE},
     {G_MFG_PROPERTY_STATUS, 1, SIG_MD_G_MFG_PROP_S, SIG_MD_G_PROP_C, mesh_cmd_sig_property_status, STATUS_NONE},
 #endif
+    {RD_OPCODE_RSP, 1, SIG_MD_G_ONOFF_S, SIG_MD_G_ONOFF_C, mesh_cmd_sig_property_status, STATUS_NONE},
+
 };
 
 /**************

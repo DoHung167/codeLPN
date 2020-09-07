@@ -33,6 +33,7 @@ vendor/common/mi_api/libs/gatt_dfu \
 vendor/common/mi_api/libs/cryptography/mja1 \
 vendor/common/mi_api/libs/cryptography \
 vendor/common/mi_api/libs/common \
+vendor/RD_Code \
 proj/mcu_spec \
 proj/mcu \
 proj/drivers \

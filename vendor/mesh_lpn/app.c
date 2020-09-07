@@ -46,6 +46,9 @@
 #include "vendor/common/blt_soft_timer.h"
 #include "proj/drivers/rf_pa.h"
 
+#include "../RD_Code/rd_define.h"
+#include "../RD_Code/rd_sensor_tx.h"
+
 #if (HCI_ACCESS==HCI_USE_UART)
 #include "../../proj/drivers/uart.h"
 #endif
@@ -63,7 +66,6 @@ MYFIFO_INIT(blt_txfifo, 40, 8);
 //----------------------- UI ---------------------------------------------
 void test_cmd_wakeup_lpn()
 {
-	u8 SendData[] = "hello Hung";
 	static u8 test_onoff;
 	#if 0
 	u32 len = OFFSETOF(mesh_cmd_g_onoff_set_t,transit_t);	// no delay 
@@ -72,11 +74,14 @@ void test_cmd_wakeup_lpn()
 	cmd.onoff = (test_onoff++) & 1;
 	//len += 10;	// test segment;
 	mesh_tx_cmd_primary(G_ONOFF_SET_NOACK, (u8 *)&cmd, len, adr_dst, 0);
-	#else
-	//access_cmd_onoff(0x0001, 0, (test_onoff++) & 1, CMD_NO_ACK, 0);
 
-	mesh_tx_cmd2normal_primary(G_LEVEL_STATUS, SendData, 10, 0x0001, 2);
-	uart_CSend("Send!\n");
+	#elif RDCODE
+
+	RD_Poll_SenData();
+
+	#else
+	access_cmd_onoff(0x0001, 0, (test_onoff++) & 1, CMD_NO_ACK, 0);
+
 	#endif
 }
 

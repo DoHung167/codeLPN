@@ -35,6 +35,10 @@
 #include "../../proj_lib/mesh_crypto/sha256_telink.h"
 #include "mesh_common.h"
 #include "../../vendor/common/app_heartbeat.h"
+
+#include "../RD_Code/rd_sensor_tx.h"
+#include "../RD_Code/rd_define.h"
+
 #if(HCI_ACCESS == HCI_USE_UART)
 #include "../../proj/drivers/uart.h"
 #endif
@@ -448,6 +452,11 @@ void mesh_friend_ship_start_poll()
     if(is_in_mesh_friend_st_lpn()){
         friend_cmd_send_poll();
 		fri_ship_proc_lpn.poll_retry = PTS_TEST_EN ? 20 : (FRI_POLL_RETRY_MAX + 1);
+
+	#if RDCODE
+		RD_Poll_SenData();
+	#endif
+
     }
 }
 

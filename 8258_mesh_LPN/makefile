@@ -26,6 +26,7 @@ RM := rm -rf
 -include vendor/common/mi_api/libs/cryptography/mja1/subdir.mk
 -include vendor/common/mi_api/libs/cryptography/subdir.mk
 -include vendor/common/mi_api/libs/common/subdir.mk
+-include vendor/RD_Code/subdir.mk
 -include proj/mcu_spec/subdir.mk
 -include proj/mcu/subdir.mk
 -include proj/drivers/subdir.mk
