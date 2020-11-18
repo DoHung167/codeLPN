@@ -151,6 +151,9 @@ _attribute_ram_code_ int main (void)    //must run in ramcode
 	LOG_USER_MSG_INFO(0, 0,"[mesh] Start from SIG Mesh", 0);
 	#endif
 
+//	volatile unsigned char vrsc_OPT3001_ConfigMessage[2] = {0xE4,0x10};
+//	i2c_write_series(0x01, 1, (unsigned char*)vrsc_OPT3001_ConfigMessage, 2);
+
 	while (1) {
 #if (MODULE_WATCHDOG_ENABLE)
 		wd_clear(); //clear watch dog

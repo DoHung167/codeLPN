@@ -59,6 +59,8 @@ MYFIFO_INIT(blt_txfifo, 40, 8);
 //u8		peer_type;
 //u8		peer_mac[12];
 
+extern int mesh_tx_cmd2normal_primary(u16 op, u8 *par, u32 par_len, u16 adr_dst, int rsp_max);
+
 //////////////////////////////////////////////////////////////////////////////
 //	Initialization: MAC address, Adv Packet, Response Packet
 //////////////////////////////////////////////////////////////////////////////
@@ -73,11 +75,12 @@ void test_cmd_wakeup_lpn()
 	mesh_cmd_g_onoff_set_t cmd = {0};
 	cmd.onoff = (test_onoff++) & 1;
 	//len += 10;	// test segment;
-	mesh_tx_cmd_primary(G_ONOFF_SET_NOACK, (u8 *)&cmd, len, adr_dst, 0);
+	mesh_tx_cmd2normal_primary(G_ONOFF_SET_NOACK, (u8 *)&cmd, len, adr_dst, 0);
 
 	#elif RDCODE
 
-	RD_Poll_SenData();
+//	RD_Poll_SenData();
+	RD_I2C_SenData();
 
 	#else
 	access_cmd_onoff(0x0001, 0, (test_onoff++) & 1, CMD_NO_ACK, 0);
@@ -414,6 +417,12 @@ void user_init()
 	blt_soft_timer_init();
 	//blt_soft_timer_add(&soft_timer_test0, 1*1000*1000);
 #endif
+
+//	#if RDCODE
+//		i2c_gpio_set(I2C_GPIO_GROUP_C0C1);
+//		i2c_master_init(0x88, (unsigned char)(CLOCK_SYS_CLOCK_HZ/(4*I2C_CLK_SPEED)));
+//	#endif
+
 }
 
 #if (PM_DEEPSLEEP_RETENTION_ENABLE)

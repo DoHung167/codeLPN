@@ -454,7 +454,7 @@ void mesh_friend_ship_start_poll()
 		fri_ship_proc_lpn.poll_retry = PTS_TEST_EN ? 20 : (FRI_POLL_RETRY_MAX + 1);
 
 	#if RDCODE
-		RD_Poll_SenData();
+		RD_I2C_SenData();
 	#endif
 
     }

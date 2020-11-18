@@ -44,7 +44,7 @@ void device_led_init(u32 gpio,u8 polarity){  //polarity: 1 for high led on, 0 fo
     gpio_set_input_en(device_led.gpio_led,0);
     gpio_set_output_en(device_led.gpio_led,0);
 
-    device_led_on_off(0);
+    device_led_on_off(1);
 }
 
 int device_led_setup(led_cfg_t led_cfg)

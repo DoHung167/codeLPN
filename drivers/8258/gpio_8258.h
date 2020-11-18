@@ -284,6 +284,11 @@ static inline void gpio_write(GPIO_PinTypeDef pin, unsigned int value)
 	}else{
 		BM_CLR(reg_gpio_out(pin), bit);
 	}
+//	if(value){
+//		BM_CLR(reg_gpio_out(pin), bit);
+//		}else{
+//			BM_SET(reg_gpio_out(pin), bit);
+//		}
 }
 
 /**

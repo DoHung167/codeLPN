@@ -181,8 +181,8 @@ extern "C" {
 
 //---------------  LED / PWM
 #if(PCBA_8258_SEL == PCBA_8258_DONGLE_48PIN)
-#define PWM_R       GPIO_PB5  	//red
-#define PWM_G       GPIO_PB4	//green
+#define PWM_R       GPIO_PB6  	//red
+#define PWM_G       GPIO_PB5	//blue
 #define PWM_B       GPIO_PWM3B0		//blue
 #define PWM_W       GPIO_PWM0A2	//white//GPIO_PWM0A2
 #elif(PCBA_8258_SEL == PCBA_8258_C1T140A3_V1_1)
@@ -245,6 +245,7 @@ extern "C" {
 #define MODULE_WATCHDOG_ENABLE		1
 #define WATCHDOG_INIT_TIMEOUT		2000  //ms
 
+#define     I2C_CLK_SPEED               200000
 
 /////////////////// set default   ////////////////
 

@@ -1244,15 +1244,15 @@ int is_led_busy()
 }
 
 void led_onoff_gpio(u32 gpio, u8 on){
-#if (FEATURE_LOWPOWER_EN || GATT_LPN_EN)
+#if (0) 								//(FEATURE_LOWPOWER_EN || GATT_LPN_EN)
     gpio_set_func (gpio, AS_GPIO);
     gpio_set_output_en (gpio, 0);
-    gpio_write(gpio, 0);
-    gpio_setup_up_down_resistor(gpio, on ? PM_PIN_PULLUP_10K : PM_PIN_PULLDOWN_100K);
+    gpio_write(gpio, 1);
+    gpio_setup_up_down_resistor(gpio, on ? PM_PIN_PULLDOWN_100K : PM_PIN_PULLUP_10K);
 #else
     gpio_set_func (gpio, AS_GPIO);
     gpio_set_output_en (gpio, 1);
-    gpio_write(gpio, on);
+    gpio_write(gpio, 0);
 #endif
 }
 
